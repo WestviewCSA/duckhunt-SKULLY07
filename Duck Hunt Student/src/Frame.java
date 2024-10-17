@@ -28,6 +28,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 	int roundTimer;
 	int score;
 	int oddBodVx = 1;
+	int oddBodVy = 1;
 	long time;
 	int currentRound = 1;
 
@@ -53,11 +54,17 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 
 	public void reset() {
 // init();
-		currentRound += 1;
+		
 		oddBod.setXY(((int) (Math.random() * (790)) + 10),((int) (Math.random() * (390)) + 10));
 		int randVx = (int) (Math.random() * (4)) + 1;
+		
 		oddBodVx += randVx;
 		oddBod.setVx(oddBodVx);
+		
+		int randVy = (int) (Math.random() * (4)) +1;
+		
+		oddBodVy += randVy;
+		oddBod.setVy(oddBodVy * -1);
 
 		duck.setXY(-50, 400);
 		duck.setVx(0);
@@ -69,9 +76,8 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 // oddBod.setXY(250, 50);
 // start off the screen
 
-		int randVx = (int) (Math.random() * (4)) + 1;
-		oddBod.setVx(randVx + oddBodVx);
-
+		currentRound += 1;
+		oddBod.setXY(0, 0);
 		roundTimer = 30;
 
 	}
@@ -121,7 +127,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		}
 
 		if (oddBod.getY() < 0 || oddBod.getY() > 600) {
-			oddBod.setVy(oddBod.getVx() * -1);
+			oddBod.setVy(oddBod.getVy() * -1);
 		}
 		
 		
@@ -137,6 +143,7 @@ public class Frame extends JPanel implements ActionListener, MouseListener, KeyL
 		
 		if( duck.getX() >= 1000) {
 			reset();
+			
 		}
 		
 		/* test code for bouncing the dock */
